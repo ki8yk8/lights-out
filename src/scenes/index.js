@@ -1,1 +1,0 @@
-import { registerMapScene } from "./map";
