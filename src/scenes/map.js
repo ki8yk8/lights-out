@@ -1,4 +1,5 @@
 import { rem } from "../helpers/utils";
+import { Message } from "../objects/message";
 import { Player } from "../objects/player";
 
 const MAP_LAYOUT = [
@@ -28,6 +29,15 @@ export function registerMapScene({ k, name, c }) {
 	k.setGravity(0);
 
 	k.scene(name, () => {
+		// create a background that stays for every scenes
+		k.add([
+			k.rect(k.width(), k.height()),
+			k.pos(0, 0),
+			k.anchor("topleft"),
+			k.color("#f1faee"),
+			k.fixed(),
+		]);
+
 		k.addLevel(MAP_LAYOUT, {
 			tileWidth: rem(1),
 			tileHeight: rem(1),
@@ -56,7 +66,7 @@ export function registerMapScene({ k, name, c }) {
 					"fuse",
 				],
 				"?": () => [
-					k.rect(rem(2), rem(1)),
+					k.rect(rem(2), rem(2)),
 					k.area(),
 					k.color("#b8b8b8"),
 					"hints",
@@ -65,5 +75,6 @@ export function registerMapScene({ k, name, c }) {
 		});
 
 		const player = Player({ k, c });
+		const message = Message({ k, text: "Welcome to the game!" });
 	});
 }
