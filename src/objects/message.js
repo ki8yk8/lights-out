@@ -30,5 +30,11 @@ export function Message({ k, text, c }) {
 		duration: 1,
 	});
 
+	k.onKeyPress(() => {
+		if (message.exists()) {
+			k.destroy(message);
+		}
+	});
+
 	return message;
 }

@@ -74,7 +74,11 @@ export function registerMapScene({ k, name, c }) {
 			},
 		});
 
+		Message({
+			k,
+			text: 'Welcome to the game! Let me tell you a secret, "If you are stuck, watchout for the hints"',
+		});
+		
 		const player = Player({ k, c });
-		const message = Message({ k, text: "Welcome to the game!" });
 	});
 }
