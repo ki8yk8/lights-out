@@ -5,10 +5,10 @@ export function Player({ k, c }) {
 
 	// handling physics and camera movement
 	player.onUpdate(() => {
-		k.setCamPos(player.worldPos());
+		// k.setCamPos(player.worldPos());
 	});
 	player.onPhysicsResolve(() => {
-		k.setCamPos(player.worldPos());
+		// k.setCamPos(player.worldPos());
 	});
 
 	// handling player movement
@@ -25,5 +25,5 @@ export function Player({ k, c }) {
 		player.move(rem(1) * c.PLAYER_SPEED, 0);
 	});
 
-	return Player;
+	return player;
 }

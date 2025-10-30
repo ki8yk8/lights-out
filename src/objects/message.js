@@ -1,4 +1,4 @@
-export function Message({ k, text, c }) {
+export function Message({ k, text, c, keypress = true }) {
 	const message = k.add([
 		k.rect(k.width() - 40, k.height() / 3),
 		k.pos(40, (k.height() * 2) / 3 - 20),
@@ -31,7 +31,7 @@ export function Message({ k, text, c }) {
 	});
 
 	k.onKeyPress(() => {
-		if (message.exists()) {
+		if (message.exists() && keypress) {
 			k.destroy(message);
 		}
 	});

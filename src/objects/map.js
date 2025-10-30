@@ -1,4 +1,5 @@
 import { rem } from "../helpers/utils";
+import { Fuse } from "./fuse";
 import { Hints } from "./hints";
 
 const MAP_LAYOUT = [
@@ -53,13 +54,7 @@ export function Map({ k, c }) {
 				k.z(1),
 				"player",
 			],
-			$: () => [
-				k.rect(rem(2), rem(2)),
-				k.pos(rem(-1), rem(-1)),
-				k.color("#00ff00"),
-				k.area(),
-				"fuse",
-			],
+			$: Fuse.bind(null, { k, c }),
 			"?": Hints.bind(null, { k, c }),
 		},
 	});

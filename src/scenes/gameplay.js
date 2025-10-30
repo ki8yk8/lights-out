@@ -17,5 +17,9 @@ export function registerGamePlayScene({ k, name, c }) {
 		});
 
 		const player = Player({ k, c });
+
+		// player.onCollide("hints", (hint) => {
+		// 	Message({ k, text: "This is a hint" });
+		// });
 	});
 }
