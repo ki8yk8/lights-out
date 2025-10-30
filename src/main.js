@@ -1,5 +1,5 @@
 import kaplay from "kaplay";
-import { registerMapScene } from "./scenes/map";
+import { registerGamePlayScene } from "./scenes/gameplay";
 
 const k = kaplay({ global: false });
 
@@ -10,7 +10,7 @@ const CELL_SIZE = 32;
 const WALL_COLOR = "#000000";
 const PLAYER_SPEED = 10;
 
-registerMapScene({
+registerGamePlayScene({
 	k,
 	name: "map",
 	c: {
