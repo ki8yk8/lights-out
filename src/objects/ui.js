@@ -9,8 +9,15 @@ export function UI({ k, c }) {
 		}),
 		k.pos(0, 0),
 		k.color("#000000"),
+		k.timer(),
 		"timer",
+		{
+			remaining_time: c.LEVEL_TIME,
+		},
 	]);
+
+	// will implement this later because this may not be necessary at all.
+	// timer.loop(1, () => {});
 
 	// life
 	const life = ui.add([

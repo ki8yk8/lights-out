@@ -10,6 +10,10 @@ const CELL_SIZE = 32;
 const WALL_COLOR = "#000000";
 const PLAYER_SPEED = 10;
 const BAG_CAPACITY = 2;
+const LEVEL_TIME = {
+	minutes: 10,
+	seconds: 0,
+};
 
 k.data = {
 	paused: false, // pauses the player physics and player camera movement
@@ -25,6 +29,7 @@ registerGamePlayScene({
 		WALL_COLOR,
 		PLAYER_SPEED,
 		BAG_CAPACITY,
+		LEVEL_TIME,
 	},
 });
 
