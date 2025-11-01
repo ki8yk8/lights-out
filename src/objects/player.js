@@ -5,10 +5,10 @@ export function Player({ k, c }) {
 
 	// handling physics and camera movement
 	player.onUpdate(() => {
-		k.setCamPos(player.worldPos());
+		if (!k.data?.paused) k.setCamPos(player.worldPos());
 	});
 	player.onPhysicsResolve(() => {
-		k.setCamPos(player.worldPos());
+		if (!k.data?.paused) k.setCamPos(player.worldPos());
 	});
 
 	// handling player movement
