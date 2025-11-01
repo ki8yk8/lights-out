@@ -4,7 +4,7 @@ import { Hints } from "./hints";
 
 const MAP_LAYOUT = [
 	"=================================",
-	"=@  ?                           =",
+	"=@  ?                          #=",
 	"=                               =",
 	"=                               =",
 	"=                               =",
@@ -56,6 +56,13 @@ export function Map({ k, c }) {
 			],
 			$: Fuse.bind(null, { k, c }),
 			"?": Hints.bind(null, { k, c }),
+			"#": () => [
+				k.rect(rem(4), rem(2)),
+				k.color("#0000ff"),
+				k.area(),
+				k.pos(rem(-3), rem(0)),
+				"electrical-box",
+			],
 		},
 	});
 }

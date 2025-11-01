@@ -18,11 +18,9 @@ export function Hints({ k, c }) {
 					});
 
 					const last_fuse = k.get("fuse", { recursive: true }).at(-1).pos;
-					const initial_camp_pos = k.getCamPos();
+					player.paused = true;
 
-					await k.tween(initial_camp_pos, last_fuse, 2, (pos) =>
-						k.setCamPos(pos)
-					);
+					await k.tween(k.getCamPos(), last_fuse, 2, (pos) => k.setCamPos(pos));
 					k.destroy(message);
 
 					message = Message({
@@ -32,7 +30,11 @@ export function Hints({ k, c }) {
 						keypress: false,
 					});
 
-					await k.wait(1, () => k.setCamPos(initial_camp_pos));
+					await k.wait(1, () => {
+						k.destroy(this);
+						k.setCamPos(player.worldPos());
+						player.paused = false;
+					});
 				});
 			},
 		},

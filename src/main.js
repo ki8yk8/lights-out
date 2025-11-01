@@ -10,6 +10,10 @@ const CELL_SIZE = 32;
 const WALL_COLOR = "#000000";
 const PLAYER_SPEED = 10;
 
+k.data = {
+	paused: false,
+}
+
 registerGamePlayScene({
 	k,
 	name: "map",
