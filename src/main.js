@@ -16,7 +16,7 @@ const LEVEL_TIME = {
 };
 
 k.data = {
-	paused: false, // pauses the player physics and player camera movement
+	paused: false, // pauses the player physics and player camera movement and player movement too
 	fuse_held: 0,
 	life: 3,
 };

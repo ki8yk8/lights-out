@@ -13,16 +13,16 @@ export function Player({ k, c }) {
 
 	// handling player movement
 	k.onKeyDown("up", () => {
-		player.move(0, rem(-1) * c.PLAYER_SPEED);
+		!k.data?.paused && player.move(0, rem(-1) * c.PLAYER_SPEED);
 	});
 	k.onKeyDown("down", () => {
-		player.move(0, rem(1) * c.PLAYER_SPEED);
+		!k.data?.paused && player.move(0, rem(1) * c.PLAYER_SPEED);
 	});
 	k.onKeyDown("left", () => {
-		player.move(rem(-1) * c.PLAYER_SPEED, 0);
+		!k.data?.paused && player.move(rem(-1) * c.PLAYER_SPEED, 0);
 	});
 	k.onKeyDown("right", () => {
-		player.move(rem(1) * c.PLAYER_SPEED, 0);
+		!k.data?.paused && player.move(rem(1) * c.PLAYER_SPEED, 0);
 	});
 
 	return player;

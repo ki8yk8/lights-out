@@ -7,5 +7,12 @@ export function Fuse({ k, c }) {
 		k.color("#00ff00"),
 		k.area(),
 		"fuse",
+		{
+			add() {
+				this.onCollide("player", (player) => {
+					
+				})
+			}
+		}
 	];
 }
