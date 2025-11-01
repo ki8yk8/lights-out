@@ -1,4 +1,4 @@
-import { rem } from "../helpers/utils";
+import { getScreenPosForObjAt, rem } from "../helpers/utils";
 import { Message } from "./message";
 
 export function Hints({ k, c }) {
@@ -18,9 +18,14 @@ export function Hints({ k, c }) {
 						keypress: false,
 					});
 
-					const last_fuse = k.get("fuse", { recursive: true }).at(-1).pos;
+					const last_fuse = k.get("fuse", { recursive: true }).at(-1);
 
-					await k.tween(k.getCamPos(), last_fuse, 2, (pos) => k.setCamPos(pos));
+					await k.tween(
+						k.getCamPos(),
+						getScreenPosForObjAt(k, last_fuse, k.width() / 2, k.height() / 3),
+						2,
+						(pos) => k.setCamPos(pos)
+					);
 					k.destroy(message);
 
 					// show an arrow on the bag capacity too
@@ -52,14 +57,12 @@ export function Hints({ k, c }) {
 
 					async function showElectrical() {
 						// get the user to see the electrical box
-						const e_box = k
-							.get("electrical-box", { recursive: true })[0]
-							.worldPos();
+						const e_box = k.get("electrical-box", { recursive: true })[0];
 
 						await k.tween(
 							k.getCamPos(),
-							k.vec2(e_box.x + 50, e_box.y - 50),
-							2,
+							getScreenPosForObjAt(k, e_box, k.width() / 2, k.height() / 3),
+							1.5,
 							(pos) => {
 								k.setCamPos(pos);
 							}
