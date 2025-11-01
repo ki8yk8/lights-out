@@ -43,18 +43,50 @@ export function Hints({ k, c }) {
 						duration: 3,
 					});
 
+					async function showGrabFuse() {
+						k.destroy(bag_pointer);
+
+						// now tell the user to get to the electrical box
+						await showElectrical();
+					}
+
+					async function showElectrical() {
+						// get the user to see the electrical box
+						const e_box = k
+							.get("electrical-box", { recursive: true })[0]
+							.worldPos();
+
+						await k.tween(
+							k.getCamPos(),
+							k.vec2(e_box.x + 50, e_box.y - 50),
+							2,
+							(pos) => {
+								k.setCamPos(pos);
+							}
+						);
+
+						message = Message({
+							k,
+							c,
+							text: "Bring those fuses to fix the electrical box. After certain number of fuse is collected lights turns on and you win.",
+							onKeyPress: destroyHint,
+						});
+					}
+
+					async function destroyHint() {
+						// finally do this
+						await k.tween(k.getCamPos(), player.worldPos(), 2, (pos) =>
+							k.setCamPos(pos)
+						);
+						k.data.paused = false;
+					}
+
 					message = Message({
 						k,
 						c,
 						text: "Grab these fuses. Note that you can only carry certain number of fuses defined by your bag capacity.",
 						keypress: true,
-						onKeyPress: async () => {
-							k.destroy(bag_pointer);
-							await k.tween(k.getCamPos(), player.worldPos(), 2, (pos) =>
-								k.setCamPos(pos)
-							);
-							k.data.paused = false;
-						},
+						onKeyPress: showGrabFuse,
 					});
 				});
 			},
