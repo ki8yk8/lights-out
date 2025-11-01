@@ -28,11 +28,10 @@ export function Hints({ k, c }) {
 						c,
 						text: "Grab these fuses. Note that you can only carry certain number of fuses defined by your bag capacity.",
 						keypress: true,
-					});
-
-					await k.wait(1, () => {
-						k.setCamPos(player.worldPos());
-						k.data.paused = false;
+						onKeyPress: () => {
+							k.setCamPos(player.worldPos());
+							k.data.paused = false;
+						},
 					});
 				});
 			},
