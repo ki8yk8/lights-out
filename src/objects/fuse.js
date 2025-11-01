@@ -1,4 +1,5 @@
 import { rem } from "../helpers/utils";
+import { Message } from "./message";
 
 export function Fuse({ k, c }) {
 	return [
@@ -10,9 +11,9 @@ export function Fuse({ k, c }) {
 		{
 			add() {
 				this.onCollide("player", (player) => {
-					
-				})
-			}
-		}
+					k.data.fuse_held += 1;
+				});
+			},
+		},
 	];
 }

@@ -1,6 +1,7 @@
 export function UI({ k, c }) {
 	// this is fixed and not affected by the camera movement
 	const ui = k.add([k.fixed(), "ui"]);
+	let prev_data = { ...k.data };
 
 	// time elpased
 	const timer = ui.add([
@@ -40,6 +41,22 @@ export function UI({ k, c }) {
 		k.anchor("topright"),
 		"bag",
 	]);
+
+	k.onUpdate(() => {
+		const new_data = k.data;
+
+		// dependency keys
+		const DEPENDS = ["fuse_held"];
+		DEPENDS.forEach((depend) => {
+			if (new_data[depend] !== prev_data[depend]) {
+				prev_data = { ...prev_data, [depend]: new_data[depend] };
+
+				if (depend === "fuse_held") {
+					bag.text = `Bag: ${k.data.fuse_held ?? 0}/${c.BAG_CAPACITY}`;
+				}
+			}
+		});
+	});
 
 	return ui;
 }
