@@ -9,10 +9,13 @@ k.loadRoot("./"); // A good idea for Itch.io publishing later
 const CELL_SIZE = 32;
 const WALL_COLOR = "#000000";
 const PLAYER_SPEED = 10;
+const BAG_CAPACITY = 2;
 
 k.data = {
-	paused: false,    // pauses the player physics and player camera movement
-}
+	paused: false, // pauses the player physics and player camera movement
+	fuse_held: 0,
+	life: 3,
+};
 
 registerGamePlayScene({
 	k,
@@ -21,6 +24,7 @@ registerGamePlayScene({
 		CELL_SIZE,
 		WALL_COLOR,
 		PLAYER_SPEED,
+		BAG_CAPACITY,
 	},
 });
 

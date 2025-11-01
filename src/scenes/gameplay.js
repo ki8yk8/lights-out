@@ -1,6 +1,7 @@
 import { Map } from "../objects/map";
 import { Message } from "../objects/message";
 import { Player } from "../objects/player";
+import { UI } from "../objects/ui";
 
 export function registerGamePlayScene({ k, name, c }) {
 	// this is a 2d game with no gravity needed
@@ -18,8 +19,6 @@ export function registerGamePlayScene({ k, name, c }) {
 
 		const player = Player({ k, c });
 
-		// player.onCollide("hints", (hint) => {
-		// 	Message({ k, text: "This is a hint" });
-		// });
+		const ui = UI({ k, c });
 	});
 }
