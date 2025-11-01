@@ -11,7 +11,7 @@ const WALL_COLOR = "#000000";
 const PLAYER_SPEED = 10;
 
 k.data = {
-	paused: false,
+	paused: false,    // pauses the player physics and player camera movement
 }
 
 registerGamePlayScene({

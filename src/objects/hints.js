@@ -10,6 +10,7 @@ export function Hints({ k, c }) {
 		{
 			add() {
 				this.onCollide("player", async (player) => {
+					k.data.paused = true;
 					let message = Message({
 						k,
 						c,
@@ -18,7 +19,6 @@ export function Hints({ k, c }) {
 					});
 
 					const last_fuse = k.get("fuse", { recursive: true }).at(-1).pos;
-					player.paused = true;
 
 					await k.tween(k.getCamPos(), last_fuse, 2, (pos) => k.setCamPos(pos));
 					k.destroy(message);
@@ -27,13 +27,12 @@ export function Hints({ k, c }) {
 						k,
 						c,
 						text: "Grab these fuses. Note that you can only carry certain number of fuses defined by your bag capacity.",
-						keypress: false,
+						keypress: true,
 					});
 
 					await k.wait(1, () => {
-						k.destroy(this);
 						k.setCamPos(player.worldPos());
-						player.paused = false;
+						k.data.paused = false;
 					});
 				});
 			},
