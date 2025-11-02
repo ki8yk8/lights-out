@@ -35,6 +35,12 @@ registerOverScene({ k, c: C, name: "gameover" });
 registerPromotionScene({ k, c: C, name: "promotion" });
 
 k.loadSprite("flashlight", "sprites/flashlight.png");
+k.loadSprite("help", "sprites/api_book.png");
+k.loadSprite("pumpkin", "sprites/pumpka.png");
+k.loadSprite("fuse", "sprites/sparkles.png");
+k.loadSprite("player", "sprites/dracula.png");
+k.loadSprite("sword", "sprites/sword.png");
+k.loadSprite("steel", "/sprites/steel.png");
 
 k.setLayers(
 	[

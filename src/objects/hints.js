@@ -3,7 +3,7 @@ import { Message } from "./message";
 
 export function Hints({ k, c }) {
 	return [
-		k.rect(rem(2), rem(2)),
+		k.sprite("help"),
 		k.area(),
 		k.color("#b8b8b8"),
 		k.layer("game"),
@@ -32,13 +32,12 @@ export function Hints({ k, c }) {
 					// show an arrow on the bag capacity too
 					const bag = k.get("bag", { recursive: true })[0];
 					const bag_pointer = k.add([
-						k.rect(100, 100),
+						k.sprite("sword"),
 						k.pos(bag.pos.x - bag.width, bag.pos.y + bag.height),
-						k.anchor("topright"),
-						k.color("#ff00ff"),
+						k.anchor("top"),
 						k.fixed(),
 						k.scale(1),
-						k.rotate(0),
+						k.rotate(45),
 						k.animate({ relative: true }),
 					]);
 

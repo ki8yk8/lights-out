@@ -210,16 +210,16 @@ export function Map({ k, c, level }) {
 		pos: start_pos,
 		tiles: {
 			"=": () => [
-				k.rect(rem(1), rem(1)),
-				k.color(c.WALL_COLOR),
+				k.sprite("steel"),
+				k.scale(0.5),
 				k.area(),
 				k.body({ isStatic: true }),
 				k.layer("bg"),
 				"wall",
 			],
 			"@": () => [
-				k.rect(rem(2), rem(2)),
-				k.color("#ff0000"),
+				k.sprite("player"),
+				k.scale(1),
 				k.area(),
 				k.body(),
 				k.z(1),

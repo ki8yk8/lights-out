@@ -7,9 +7,8 @@ import { rem } from "../helpers/utils";
 // Exception: might be hidden space where human can sit and escape ghost
 export function Ghost({ k, c, pos }) {
 	const ghost = k.add([
-		k.rect(rem(2), rem(2)),
+		k.sprite("pumpkin"),
 		k.anchor("center"),
-		k.color("#ff00ff"),
 		k.area(),
 		k.body(),
 		k.pos(pos),
