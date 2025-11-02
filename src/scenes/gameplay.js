@@ -7,7 +7,7 @@ export function registerGamePlayScene({ k, name, c }) {
 	// this is a 2d game with no gravity needed
 	k.setGravity(0);
 
-	k.scene(name, () => {
+	k.scene(name, (level) => {
 		// creating the map
 		Map({ k, c });
 
@@ -20,5 +20,20 @@ export function registerGamePlayScene({ k, name, c }) {
 		const player = Player({ k, c });
 
 		const ui = UI({ k, c });
+
+		k.onUpdate(() => {
+			// if game is over
+			if (k.data.fuse_dropped >= k.data.fuse_needed) {
+				// clear the data for new level
+				k.data = {
+					...k.data,
+					fuse_held: 0,
+					life: 3,
+					fuse_needed: 3,
+					fuse_dropped: 0,
+				};
+				k.go(name, level + 1);
+			}
+		});
 	});
 }
