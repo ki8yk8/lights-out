@@ -139,16 +139,12 @@ export function Map({ k, c, level }) {
 		// 	throw Error(index);
 		// }
 
-		return k.vec2(x * tile_w, y * tile_ht);
-	}
-
-	for (let i = 0; i <= 1000; i++) {
-		getRandomPosInsideWall();
+		return k.vec2(x * tile_w + tile_w / 2, y * tile_ht + tile_ht / 2);
 	}
 
 	// spawning the ghosts
-	k.loop(1, () => {
-		const ghost = Ghost({ k, c });
+	k.loop(0.1, () => {
+		const ghost = Ghost({ k, c, pos: getRandomPosInsideWall() });
 		k.wait(1, () => k.destroy(ghost));
 	});
 
