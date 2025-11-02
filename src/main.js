@@ -9,7 +9,7 @@ k.loadRoot("./"); // A good idea for Itch.io publishing later
 const CELL_SIZE = 32;
 const WALL_COLOR = "#000000";
 const PLAYER_SPEED = 10;
-const GHOST_SPEED = 9;
+const GHOST_SPEED = 15;
 const BAG_CAPACITY = 2;
 const LEVEL_TIME = {
 	minutes: 10,

@@ -22,6 +22,11 @@ export function Ghost({ k, c, pos }) {
 			stuck_frames: 0,
 			prev_pos: pos.clone(),
 			player_last_pos: null,
+			velocity: {
+				x: 0,
+				y: 0,
+				at: k.time(),
+			},
 		},
 		"ghost",
 	]);
@@ -35,15 +40,23 @@ export function Ghost({ k, c, pos }) {
 		// if the player moved
 		if (player && player.pos.dist(ghost.player_last_pos) > 10) {
 			ghost.player_last_pos = player.pos;
-			// increase speed and run toward the player
-			console.log("Player moved");
-		}
 
-		// move the ghost
-		ghost.move(
-			rem(1) * c.GHOST_SPEED * 0.5 * ghost.dir.x,
-			rem(1) * c.GHOST_SPEED * 0.5 * ghost.dir.y
-		);
+			// increase speed and run toward the player
+			const [dx, dy] = [player.pos.x - ghost.pos.x, player.pos.y - ghost.pos.y];
+			const distance = player.pos.dist(ghost.pos);
+
+			const [vx, vy] = [
+				(dx / distance) * c.GHOST_SPEED * rem(1),
+				(dy / distance) * c.GHOST_SPEED * rem(1),
+			];
+			
+			ghost.vel.x = vx;
+			ghost.vel.y = vy;
+		} else {
+			// move the ghost
+			ghost.vel.x = rem(1) * c.GHOST_SPEED * 0.5 * ghost.dir.x;
+			ghost.vel.y = rem(1) * c.GHOST_SPEED * 0.5 * ghost.dir.y;
+		}
 
 		if (ghost.pos.dist(ghost.prev_pos) < 10) {
 			ghost.stuck_frames += 1;
