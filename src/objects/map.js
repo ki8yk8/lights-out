@@ -98,18 +98,53 @@ export function Map({ k, c, level }) {
 		let fully_valid = [...arrayed_map_layout];
 		fully_valid = fully_valid.map((row, i) => {
 			return row.map((elem, j) => {
-				if (horizontally_valid[i][j] === "V" && vertically_valid[i][j] === "V") {
+				if (
+					horizontally_valid[i][j] === "V" &&
+					vertically_valid[i][j] === "V"
+				) {
 					return "V";
 				} else {
 					return " ";
-				} 
-			})
-		})
+				}
+			});
+		});
 
-		console.log(fully_valid);
+		const flattened_valid = fully_valid.flat();
+		const total_valids = flattened_valid.reduce((acc, elem) => {
+			if (elem === "V") {
+				return acc + 1;
+			}
+			return acc;
+		}, 0);
+
+		const random_number = Math.floor(Math.random() * total_valids);
+
+		const valid_indices = [];
+		flattened_valid.forEach((item, index) => {
+			if (item === "V") valid_indices.push(index);
+		});
+
+		const flattened_index = valid_indices[random_number];
+
+		// if (flattened_valid[flattened_index] !== "V") {
+		// 	throw new Error("Flattened wrong");
+		// }
+
+		const [y, x] = [
+			Math.floor(flattened_index / arrayed_map_layout[0].length),
+			flattened_index % arrayed_map_layout[0].length,
+		];
+
+		// if (fully_valid[y][x] !== "V") {
+		// 	throw Error(index);
+		// }
+
+		return k.vec2(x * tile_w, y * tile_ht);
 	}
 
-	getRandomPosInsideWall();
+	for (let i = 0; i <= 1000; i++) {
+		getRandomPosInsideWall();
+	}
 
 	// spawning the ghosts
 	k.loop(1, () => {
