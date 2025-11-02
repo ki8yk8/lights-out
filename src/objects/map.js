@@ -53,7 +53,7 @@ function transposeMatrix(mat) {
 	return mat[0].map((_, colIndex) => mat.map((row) => row[colIndex]));
 }
 
-function getSurroundingIndices(x, y, max_cols, max_rows) {
+function getSurroundingIndices(x, y, max_cols, max_rows, radius = 1) {
 	const surrounding_indices = [
 		[x - 1, y],
 		[x - 1, y - 1],
@@ -64,10 +64,23 @@ function getSurroundingIndices(x, y, max_cols, max_rows) {
 		[x, y + 1],
 		[x - 1, y + 1],
 	];
-
-	return surrounding_indices.filter(([i, j]) => {
-		return i >= 0 && j >= 0 && i < max_cols && j < max_rows;
+	const valid_neighbours = surrounding_indices.filter(([i, j]) => {
+		return i >= 1 && j >= 1 && i < max_cols && j < max_rows;
 	});
+
+	if (radius <= 1) {
+		return valid_neighbours;
+	}
+
+	let all_neighbours = [...valid_neighbours];
+	for (const [i, j] of valid_neighbours) {
+		all_neighbours = [
+			...all_neighbours,
+			...getSurroundingIndices(i, j, max_cols, max_rows, radius - 1),
+		];
+	}
+
+	return all_neighbours;
 }
 
 function getValidAreas(map_layout) {
@@ -127,20 +140,23 @@ export function Map({ k, c, level }) {
 		});
 
 		// if the surroundign is also valid then, only valid
-		fully_valid = fully_valid.map((row, i) => {
-			return row.map((elem, j) => {
+		fully_valid = fully_valid.map((row, j) => {
+			return row.map((elem, i) => {
 				if (elem !== "V") return elem;
 
-				getSurroundingIndices(
+				const neighbours = getSurroundingIndices(
 					i,
 					j,
 					fully_valid.length,
-					fully_valid[0].length
-				).forEach(([x, y]) => {
-					if (fully_valid[x][y] !== "V") return " ";
+					fully_valid[0].length,
+					2
+				);
+
+				const neighbours_valid = neighbours.every(([x, y]) => {
+					return fully_valid[y][x] === "V";
 				});
 
-				return elem;
+				return neighbours_valid ? "V" : " ";
 			});
 		});
 
@@ -174,11 +190,11 @@ export function Map({ k, c, level }) {
 		// 	throw Error(index);
 		// }
 
-		return k.vec2(x * tile_w + tile_w / 2, y * tile_ht + tile_ht / 2);
+		return k.vec2(x * tile_w + rem(1), y * tile_ht + rem(1));
 	}
 
 	// spawning the ghosts
-	k.loop(0.1, () => {
+	k.loop(1, () => {
 		let ghost = Ghost({ k, c, pos: getRandomPosInsideWall() });
 		k.wait(1, () => k.destroy(ghost));
 	});
