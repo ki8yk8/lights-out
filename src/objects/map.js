@@ -49,6 +49,28 @@ const MAP_LAYOUTS = {
 	],
 };
 
+function transposeMatrix(mat) {
+	return mat[0].map((_, colIndex) => mat.map((row) => row[colIndex]));
+}
+
+function getValidAreas(map_layout) {
+	// '=' = wall, " " = donot use, "V" = valid
+	let valid_area = map_layout.map((row) => {
+		const [first, last] = [row.indexOf("="), row.lastIndexOf("=")];
+
+		return row.map((elem, index) => {
+			if (elem === "=") return "=";
+			if (index > first && index < last && elem === " ") {
+				// inside the two limits of wall
+				return "V";
+			}
+			return " ";
+		});
+	});
+
+	return valid_area;
+}
+
 export function Map({ k, c, level }) {
 	const [tile_w, tile_ht] = [rem(1), rem(1)];
 	const [wall_w, wall_ht] = [rem(1), rem[1]];
@@ -56,7 +78,7 @@ export function Map({ k, c, level }) {
 	const map_layout = MAP_LAYOUTS[level];
 
 	// create a background that stays for every scenes
-	const darkness = k.add([
+	k.add([
 		k.rect(k.width(), k.height()),
 		k.color(255, 255, 255),
 		k.pos(0, 0),
@@ -66,21 +88,25 @@ export function Map({ k, c, level }) {
 	]);
 
 	function getRandomPosInsideWall() {
-		const pos_array = [...map_layout];
+		const arrayed_map_layout = map_layout.map((row) => row.split(""));
+		const horizontally_valid = getValidAreas(arrayed_map_layout);
+		const vertically_valid = transposeMatrix(
+			getValidAreas(transposeMatrix(arrayed_map_layout))
+		);
 
-		let valid_area = pos_array.map((row) => {
-			const [first, last] = [row.indexOf("="), row.lastIndexOf("=")];
-
-			return row.split("").map((elem, index) => {
-				if (index >= first && index <= last && elem === " ") {
-					// inside the two limits of wall
+		// full valid = valid in both
+		let fully_valid = [...arrayed_map_layout];
+		fully_valid = fully_valid.map((row, i) => {
+			return row.map((elem, j) => {
+				if (horizontally_valid[i][j] === "V" && vertically_valid[i][j] === "V") {
 					return "V";
-				}
-				return " ";
-			});
-		});
+				} else {
+					return " ";
+				} 
+			})
+		})
 
-				
+		console.log(fully_valid);
 	}
 
 	getRandomPosInsideWall();
