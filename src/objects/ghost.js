@@ -22,14 +22,13 @@ export function Ghost({ k, c, pos }) {
 			stuck_frames: 0,
 			prev_pos: pos.clone(),
 			player_last_pos: null,
-			velocity: {
-				x: 0,
-				y: 0,
-				at: k.time(),
-			},
 		},
 		"ghost",
 	]);
+
+	// move the ghost
+	ghost.vel.x = rem(1) * c.GHOST_SPEED * 0.5 * ghost.dir.x;
+	ghost.vel.y = rem(1) * c.GHOST_SPEED * 0.5 * ghost.dir.y;
 
 	// every frame ghost moves in one direction straight
 	ghost.onUpdate(() => {
@@ -37,6 +36,7 @@ export function Ghost({ k, c, pos }) {
 		if (player && !ghost.player_last_pos) {
 			ghost.player_last_pos = player.pos;
 		}
+
 		// if the player moved
 		if (player && player.pos.dist(ghost.player_last_pos) > 10) {
 			ghost.player_last_pos = player.pos;
@@ -49,13 +49,9 @@ export function Ghost({ k, c, pos }) {
 				(dx / distance) * c.GHOST_SPEED * rem(1),
 				(dy / distance) * c.GHOST_SPEED * rem(1),
 			];
-			
+
 			ghost.vel.x = vx;
 			ghost.vel.y = vy;
-		} else {
-			// move the ghost
-			ghost.vel.x = rem(1) * c.GHOST_SPEED * 0.5 * ghost.dir.x;
-			ghost.vel.y = rem(1) * c.GHOST_SPEED * 0.5 * ghost.dir.y;
 		}
 
 		if (ghost.pos.dist(ghost.prev_pos) < 10) {
@@ -83,6 +79,9 @@ export function Ghost({ k, c, pos }) {
 			filtered_configs[Math.floor(Math.random() * filtered_configs.length)];
 		ghost.dir.x = config[0];
 		ghost.dir.y = config[1];
+		// move the ghost
+		ghost.vel.x = rem(1) * c.GHOST_SPEED * 0.5 * ghost.dir.x;
+		ghost.vel.y = rem(1) * c.GHOST_SPEED * 0.5 * ghost.dir.y;
 	}
 
 	// when collide on wall randomly change orientation
