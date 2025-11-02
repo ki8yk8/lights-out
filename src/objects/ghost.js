@@ -10,8 +10,63 @@ export function Ghost({ k, c, pos }) {
 		k.rect(rem(2), rem(2)),
 		k.anchor("center"),
 		k.color("#ff00ff"),
+		k.area(),
+		k.body(),
 		k.pos(pos),
+		k.z(1),
+		{
+			dir: {
+				x: 1,
+				y: 0,
+			},
+			stuck_frames: 0,
+			prev_pos: pos.clone(),
+		},
+		"ghost",
 	]);
+
+	// every frame ghost moves in one direction straight
+	ghost.onUpdate(() => {
+		// move the ghost
+		ghost.move(rem(2) * ghost.dir.x, rem(2) * ghost.dir.y);
+
+		if (ghost.pos.dist(ghost.prev_pos) < 10) {
+			ghost.stuck_frames += 1;
+		} else {
+			ghost.stuck_frames = 0;
+			ghost.prev_pos = ghost.pos.clone();
+		}
+
+		if (ghost.stuck_frames > 60) {
+			setRandomDirection();
+			ghost.stuck_frames = 0;
+		}
+	});
+
+	function setRandomDirection() {
+		const filtered_configs = configs.filter(([x, y]) => {
+			if (ghost.dir.x === x && ghost.dir.y === y) {
+				return false;
+			}
+			return true;
+		});
+
+		const config =
+			filtered_configs[Math.floor(Math.random() * filtered_configs.length)];
+		ghost.dir.x = config[0];
+		ghost.dir.y = config[1];
+	}
+
+	// when collide on wall randomly change orientation
+	const configs = [
+		[0, 1],
+		[0, -1],
+		[1, 0],
+		[-1, 0],
+	];
+	ghost.onCollide("wall", () => {
+		setRandomDirection();
+	});
 
 	return ghost;
 }
