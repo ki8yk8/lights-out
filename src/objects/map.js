@@ -57,7 +57,7 @@ export function Map({ k, c, level }) {
 		k.pos(0, 0),
 		k.anchor("topleft"),
 		k.fixed(),
-		k.layer("lights"),
+		k.layer("lights-dark"),
 	]);
 
 	k.addLevel(MAP_LAYOUTS[level], {
@@ -78,7 +78,7 @@ export function Map({ k, c, level }) {
 				k.color("#ff0000"),
 				k.area(),
 				k.body(),
-				k.z(1),
+				// k.z(1),
 				k.layer("game"),
 				"player",
 			],

@@ -41,7 +41,8 @@ k.setLayers(
 	[
 		"bg", // walls and props
 		"game", // player, ghosts, items
-		"lights", // darkness, mask
+		"lights-dark", // darkness
+		"lights-light", // mask
 		"ui", // text, HUD bar
 	],
 	"game"
