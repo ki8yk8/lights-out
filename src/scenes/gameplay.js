@@ -9,7 +9,7 @@ export function registerGamePlayScene({ k, name, c }) {
 
 	k.scene(name, (level) => {
 		// creating the map
-		Map({ k, c });
+		Map({ k, c, level });
 
 		// creating the first message
 		Message({

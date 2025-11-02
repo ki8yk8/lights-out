@@ -1,6 +1,6 @@
 export function UI({ k, c }) {
 	// this is fixed and not affected by the camera movement
-	const ui = k.add([k.fixed(), "ui"]);
+	const ui = k.add([k.fixed(), k.layer("ui"), "ui"]);
 	let prev_data = { ...k.data };
 
 	// time elpased

@@ -6,6 +6,7 @@ export function Hints({ k, c }) {
 		k.rect(rem(2), rem(2)),
 		k.area(),
 		k.color("#b8b8b8"),
+		k.layer("ui"),
 		"hints",
 		{
 			add() {

@@ -35,4 +35,16 @@ registerGamePlayScene({
 	},
 });
 
-k.go("map");
+k.loadSprite("flashlight", "sprites/flashlight.png");
+
+k.setLayers(
+	[
+		"bg", // walls and props
+		"game", // player, ghosts, items
+		"lights", // darkness, mask
+		"ui", // text, HUD bar
+	],
+	"game"
+);
+
+k.go("map", 1);

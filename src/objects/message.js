@@ -7,6 +7,7 @@ export function Message({ k, text, c, keypress = true, onKeyPress }) {
 		k.z(2),
 		k.color("#080808"),
 		k.outline(1, k.Color.fromHex("#ffffff")),
+		k.layer("ui"),
 	]);
 
 	message.add([
