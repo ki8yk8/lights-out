@@ -22,9 +22,9 @@ export function registerGamePlayScene({ k, name, c }) {
 		const ui = UI({ k, c });
 
 		k.onUpdate(() => {
-			// if game is over
+			// if game is completed
 			if (k.data.fuse_dropped >= k.data.fuse_needed) {
-				// clear the data for new level
+				// clear the data for new level; LATER move this to first
 				k.data = {
 					...k.data,
 					fuse_held: 0,
@@ -32,7 +32,21 @@ export function registerGamePlayScene({ k, name, c }) {
 					fuse_needed: 3,
 					fuse_dropped: 0,
 				};
-				k.go(name, level + 1);
+
+				k.go("promotion", level);
+			}
+
+			if (k.data.life <= 0) {
+				// clear the data for new level; LATER move this to first
+				k.data = {
+					...k.data,
+					fuse_held: 0,
+					life: 3,
+					fuse_needed: 3,
+					fuse_dropped: 0,
+				};
+
+				k.go("gameover", level);
 			}
 		});
 	});

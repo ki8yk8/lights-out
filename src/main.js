@@ -1,19 +1,23 @@
 import kaplay from "kaplay";
 import { registerGamePlayScene } from "./scenes/gameplay";
+import { registerOverScene } from "./scenes/over";
+import { registerPromotionScene } from "./scenes/promotion";
 
 const k = kaplay({ global: false });
 
 k.loadRoot("./"); // A good idea for Itch.io publishing later
 
 // defining constants
-const CELL_SIZE = 32;
-const WALL_COLOR = "#000000";
-const PLAYER_SPEED = 10;
-const GHOST_SPEED = 15;
-const BAG_CAPACITY = 2;
-const LEVEL_TIME = {
-	minutes: 10,
-	seconds: 0,
+const C = {
+	CELL_SIZE: 32,
+	WALL_COLOR: "#000000",
+	PLAYER_SPEED: 10,
+	GHOST_SPEED: 15,
+	BAG_CAPACITY: 2,
+	LEVEL_TIME: {
+		minutes: 10,
+		seconds: 0,
+	},
 };
 
 k.data = {
@@ -26,18 +30,9 @@ k.data = {
 	ghost_lasts: 5,
 };
 
-registerGamePlayScene({
-	k,
-	name: "map",
-	c: {
-		CELL_SIZE,
-		WALL_COLOR,
-		PLAYER_SPEED,
-		GHOST_SPEED,
-		BAG_CAPACITY,
-		LEVEL_TIME,
-	},
-});
+registerGamePlayScene({ k, c: C, name: "startgame" });
+registerOverScene({ k, c: C, name: "gameover" });
+registerPromotionScene({ k, c: C, name: "promotion" });
 
 k.loadSprite("flashlight", "sprites/flashlight.png");
 
@@ -50,4 +45,4 @@ k.setLayers(
 	"game"
 );
 
-k.go("map", 1);
+k.go("startgame", 1);
