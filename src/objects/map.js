@@ -194,11 +194,15 @@ export function Map({ k, c, level }) {
 	}
 
 	// spawning the ghosts
-	Ghost({ k, c, pos: getRandomPosInsideWall() });
-	// k.loop(k.data.ghost_interval, () => {
-	// 	let ghost = Ghost({ k, c, pos: getRandomPosInsideWall() });
-	// 	k.wait(k.data.ghost_lasts, () => k.destroy(ghost));
-	// });
+	let first = true;
+	k.loop(k.data.ghost_interval, () => {
+		if (first) {
+			first = false;
+			return;
+		}
+		let ghost = Ghost({ k, c, pos: getRandomPosInsideWall() });
+		k.wait(k.data.ghost_lasts, () => k.destroy(ghost));
+	});
 
 	k.addLevel(map_layout, {
 		tileWidth: tile_w,
