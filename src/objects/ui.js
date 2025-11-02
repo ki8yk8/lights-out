@@ -46,13 +46,15 @@ export function UI({ k, c }) {
 		const new_data = k.data;
 
 		// dependency keys
-		const DEPENDS = ["fuse_held"];
+		const DEPENDS = ["fuse_held", "life"];
 		DEPENDS.forEach((depend) => {
 			if (new_data[depend] !== prev_data[depend]) {
 				prev_data = { ...prev_data, [depend]: new_data[depend] };
 
 				if (depend === "fuse_held") {
 					bag.text = `Bag: ${k.data.fuse_held ?? 0}/${c.BAG_CAPACITY}`;
+				} else if (depend === "life") {
+					life.text = `Life: ${k.data.life ?? 1}`;
 				}
 			}
 		});

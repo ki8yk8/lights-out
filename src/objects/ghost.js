@@ -64,9 +64,14 @@ export function Ghost({ k, c, pos }) {
 		[1, 0],
 		[-1, 0],
 	];
+
 	ghost.onCollide("wall", () => {
 		setRandomDirection();
 	});
+
+	ghost.onCollide("player", () => {
+		k.data.life--;
+	})
 
 	return ghost;
 }
