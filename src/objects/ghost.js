@@ -21,14 +21,29 @@ export function Ghost({ k, c, pos }) {
 			},
 			stuck_frames: 0,
 			prev_pos: pos.clone(),
+			player_last_pos: null,
 		},
 		"ghost",
 	]);
 
 	// every frame ghost moves in one direction straight
 	ghost.onUpdate(() => {
+		const player = k.get("player", { recursive: true })[0];
+		if (player && !ghost.player_last_pos) {
+			ghost.player_last_pos = player.pos;
+		}
+		// if the player moved
+		if (player && player.pos.dist(ghost.player_last_pos) > 10) {
+			ghost.player_last_pos = player.pos;
+			// increase speed and run toward the player
+			console.log("Player moved");
+		}
+
 		// move the ghost
-		ghost.move(rem(2) * ghost.dir.x, rem(2) * ghost.dir.y);
+		ghost.move(
+			rem(1) * c.GHOST_SPEED * 0.5 * ghost.dir.x,
+			rem(1) * c.GHOST_SPEED * 0.5 * ghost.dir.y
+		);
 
 		if (ghost.pos.dist(ghost.prev_pos) < 10) {
 			ghost.stuck_frames += 1;
@@ -71,7 +86,7 @@ export function Ghost({ k, c, pos }) {
 
 	ghost.onCollide("player", () => {
 		k.data.life--;
-	})
+	});
 
 	return ghost;
 }

@@ -9,6 +9,7 @@ k.loadRoot("./"); // A good idea for Itch.io publishing later
 const CELL_SIZE = 32;
 const WALL_COLOR = "#000000";
 const PLAYER_SPEED = 10;
+const GHOST_SPEED = 9;
 const BAG_CAPACITY = 2;
 const LEVEL_TIME = {
 	minutes: 10,
@@ -21,6 +22,8 @@ k.data = {
 	life: 3,
 	fuse_needed: 3,
 	fuse_dropped: 0,
+	ghost_interval: 3,
+	ghost_lasts: 5,
 };
 
 registerGamePlayScene({
@@ -30,6 +33,7 @@ registerGamePlayScene({
 		CELL_SIZE,
 		WALL_COLOR,
 		PLAYER_SPEED,
+		GHOST_SPEED,
 		BAG_CAPACITY,
 		LEVEL_TIME,
 	},
