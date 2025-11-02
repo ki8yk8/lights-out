@@ -53,6 +53,23 @@ function transposeMatrix(mat) {
 	return mat[0].map((_, colIndex) => mat.map((row) => row[colIndex]));
 }
 
+function getSurroundingIndices(x, y, max_cols, max_rows) {
+	const surrounding_indices = [
+		[x - 1, y],
+		[x - 1, y - 1],
+		[x, y - 1],
+		[x + 1, y - 1],
+		[x + 1, y],
+		[x + 1, y + 1],
+		[x, y + 1],
+		[x - 1, y + 1],
+	];
+
+	return surrounding_indices.filter(([i, j]) => {
+		return i >= 0 && j >= 0 && i < max_cols && j < max_rows;
+	});
+}
+
 function getValidAreas(map_layout) {
 	// '=' = wall, " " = donot use, "V" = valid
 	let valid_area = map_layout.map((row) => {
@@ -109,6 +126,24 @@ export function Map({ k, c, level }) {
 			});
 		});
 
+		// if the surroundign is also valid then, only valid
+		fully_valid = fully_valid.map((row, i) => {
+			return row.map((elem, j) => {
+				if (elem !== "V") return elem;
+
+				getSurroundingIndices(
+					i,
+					j,
+					fully_valid.length,
+					fully_valid[0].length
+				).forEach(([x, y]) => {
+					if (fully_valid[x][y] !== "V") return " ";
+				});
+
+				return elem;
+			});
+		});
+
 		const flattened_valid = fully_valid.flat();
 		const total_valids = flattened_valid.reduce((acc, elem) => {
 			if (elem === "V") {
@@ -144,7 +179,7 @@ export function Map({ k, c, level }) {
 
 	// spawning the ghosts
 	k.loop(0.1, () => {
-		const ghost = Ghost({ k, c, pos: getRandomPosInsideWall() });
+		let ghost = Ghost({ k, c, pos: getRandomPosInsideWall() });
 		k.wait(1, () => k.destroy(ghost));
 	});
 
