@@ -19,6 +19,8 @@ k.data = {
 	paused: false, // pauses the player physics and player camera movement and player movement too
 	fuse_held: 0,
 	life: 3,
+	fuse_needed: 3,
+	fuse_dropped: 0,
 };
 
 registerGamePlayScene({

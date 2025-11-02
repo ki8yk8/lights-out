@@ -11,7 +11,11 @@ export function Fuse({ k, c }) {
 		{
 			add() {
 				this.onCollide("player", (player) => {
+					if (k.data.fuse_held >= c.BAG_CAPACITY) return;
 					k.data.fuse_held += 1;
+
+					// destroy the fuse
+					k.destroy(this);
 				});
 			},
 		},
