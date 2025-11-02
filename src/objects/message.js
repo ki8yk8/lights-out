@@ -15,6 +15,7 @@ export function Message({ k, text, c, keypress = true, onKeyPress }) {
 			size: 32,
 			width: k.width() - 40 - 40 * 2,
 		}),
+		k.color("#ffffff"),
 		k.pos(40),
 	]);
 

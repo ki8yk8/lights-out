@@ -40,9 +40,7 @@ k.loadSprite("flashlight", "sprites/flashlight.png");
 k.setLayers(
 	[
 		"bg", // walls and props
-		"game", // player, ghosts, items
-		"lights-dark", // darkness
-		"lights-light", // mask
+		"game", // players
 		"ui", // text, HUD bar
 	],
 	"game"

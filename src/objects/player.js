@@ -3,21 +3,8 @@ import { rem } from "../helpers/utils";
 export function Player({ k, c }) {
 	const player = k.get("player", { recursive: true })[0];
 
-	const light = k.add([
-		k.circle(100),
-		k.color(255, 255, 255),
-		// k.blend(k.BlendMode.Add),
-		k.layer("lights-light"),
-		k.anchor("center"),
-		k.fixed(),
-		"flashlight",
-	]);
-
 	// handling physics and camera movement
 	player.onUpdate(() => {
-		// flashlight follows the player
-		light.pos = player.screenPos();
-
 		if (!k.data?.paused) k.setCamPos(player.worldPos());
 	});
 	player.onPhysicsResolve(() => {

@@ -52,12 +52,11 @@ export function Map({ k, c, level }) {
 	// create a background that stays for every scenes
 	const darkness = k.add([
 		k.rect(k.width(), k.height()),
-		k.color(0, 0, 0),
-		k.opacity(0.95),
+		k.color(255, 255, 255),
 		k.pos(0, 0),
 		k.anchor("topleft"),
 		k.fixed(),
-		k.layer("lights-dark"),
+		k.layer("bg"),
 	]);
 
 	k.addLevel(MAP_LAYOUTS[level], {
@@ -78,7 +77,7 @@ export function Map({ k, c, level }) {
 				k.color("#ff0000"),
 				k.area(),
 				k.body(),
-				// k.z(1),
+				k.z(1),
 				k.layer("game"),
 				"player",
 			],
