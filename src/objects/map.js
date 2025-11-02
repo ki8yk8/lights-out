@@ -1,6 +1,7 @@
 import { rem } from "../helpers/utils";
 import { ElectricalBox } from "./electrical-box";
 import { Fuse } from "./fuse";
+import { Ghost } from "./ghost";
 import { Hints } from "./hints";
 
 const MAP_LAYOUTS = {
@@ -49,6 +50,11 @@ const MAP_LAYOUTS = {
 };
 
 export function Map({ k, c, level }) {
+	const [tile_w, tile_ht] = [rem(1), rem(1)];
+	const [wall_w, wall_ht] = [rem(1), rem[1]];
+	const start_pos = k.vec2(rem(2), rem(2));
+	const map_layout = MAP_LAYOUTS[level];
+
 	// create a background that stays for every scenes
 	const darkness = k.add([
 		k.rect(k.width(), k.height()),
@@ -59,10 +65,36 @@ export function Map({ k, c, level }) {
 		k.layer("bg"),
 	]);
 
-	k.addLevel(MAP_LAYOUTS[level], {
-		tileWidth: rem(1),
-		tileHeight: rem(1),
-		pos: k.vec2(rem(2), rem(2)),
+	function getRandomPosInsideWall() {
+		const pos_array = [...map_layout];
+
+		let valid_area = pos_array.map((row) => {
+			const [first, last] = [row.indexOf("="), row.lastIndexOf("=")];
+
+			return row.split("").map((elem, index) => {
+				if (index >= first && index <= last && elem === " ") {
+					// inside the two limits of wall
+					return "V";
+				}
+				return " ";
+			});
+		});
+
+				
+	}
+
+	getRandomPosInsideWall();
+
+	// spawning the ghosts
+	k.loop(1, () => {
+		const ghost = Ghost({ k, c });
+		k.wait(1, () => k.destroy(ghost));
+	});
+
+	k.addLevel(map_layout, {
+		tileWidth: tile_w,
+		tileHeight: tile_ht,
+		pos: start_pos,
 		tiles: {
 			"=": () => [
 				k.rect(rem(1), rem(1)),
