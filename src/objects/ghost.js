@@ -17,21 +17,24 @@ export function Ghost({ k, c, horizontal = true }) {
 				y: horizontal ? 0 : -1,
 			},
 			add() {
-				this.onUpdate(() => {
-					this.vel.x = this.dir.x * rem(1) * c.GHOST_SPEED;
-					this.vel.y = this.dir.y * rem(1) * c.GHOST_SPEED;
-				});
+				this.vel.x = this.dir.x * rem(1) * c.GHOST_SPEED;
+				this.vel.y = this.dir.y * rem(1) * c.GHOST_SPEED;
 
 				this.onCollide("wall", () => {
 					if (horizontal) {
 						this.dir.x *= -1;
+						this.vel.x = this.dir.x * rem(1) * c.GHOST_SPEED;
 					} else {
 						this.dir.y *= -1;
+						this.vel.y = this.dir.y * rem(1) * c.GHOST_SPEED;
 					}
 				});
-				// add sound effects
+
 				// add hit
-				// add hit sound
+				this.onCollide("player", () => {
+					k.data.life--;
+					k.play("ghost");
+				});
 			},
 		},
 	];
