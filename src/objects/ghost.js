@@ -12,17 +12,35 @@ export function Ghost({ k, c, horizontal = true }) {
 		k.area(),
 		k.body(),
 		k.layer("game"),
+		k.scale(1),
 		"ghost",
 		{
+			god_paused: false,
 			dir: {
 				x: horizontal ? -1 : 0,
 				y: horizontal ? 0 : -1,
 			},
 			add() {
+				const ghost_emitter = k.add([
+					k.pos(k.center()),
+					k.particles(
+						{
+							max: 40,
+							speed: [40, 90],
+							lifetime: [0.4, 0.9],
+							angle: [0, 360],
+							opacities: [1.0, 0.0],
+							colors: [k.rgb(195, 107, 63)],
+							scale: [1.0, 0.4],
+						},
+						{ direction: 0, spread: 360 }
+					),
+				]);
+
 				// this.vel.x = this.dir.x * rem(1) * c.GHOST_SPEED;
 				// this.vel.y = this.dir.y * rem(1) * c.GHOST_SPEED;
 				k.onUpdate(() => {
-					this.move(
+					!this.god_paused && this.move(
 						this.dir.x * rem(1) * c.GHOST_SPEED,
 						this.dir.y * rem(1) * c.GHOST_SPEED
 					);
@@ -41,8 +59,21 @@ export function Ghost({ k, c, horizontal = true }) {
 				// add hit
 				this.onCollide("player", async (player) => {
 					if (k.data.god_mode) {
-						k.data.life++;
-						k.destroy(this);
+						this.god_paused = true;
+						
+						// blast the ghost emittor
+						ghost_emitter.pos.x = this.pos.x + this.width / 2;
+						ghost_emitter.pos.y = this.pos.y + this.height;
+						
+						ghost_emitter.emit(30);
+						k.wait(1, () => k.destroy(ghost_emitter));
+						// scale down the ghost to zero
+						await k.tween(1.0, 0.0, 0.7, (s) => {
+							this.scaleTo(s);
+						});
+
+						// destry the ghost
+						this.exists() && k.destroy(this);
 						return;
 					}
 
