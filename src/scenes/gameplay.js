@@ -21,15 +21,34 @@ export function registerGamePlayScene({ k, name, c }) {
 		Map({ k, c, level });
 
 		// creating the first message
-		level === 1 &&
+		!k.data.game_played &&
+			level === 1 &&
 			Message({
 				k,
 				text: 'Welcome to the game! Let me tell you a secret, "If you are stuck, watchout for the hints"',
 			});
 
+		k.data.game_played = true;
+
 		const player = Player({ k, c });
 
 		const ui = UI({ k, c, level });
+
+		// start god mode
+		k.onKeyPress("g", () => {
+			k.data.god_mode = !k.data.god_mode;
+			if (!k.data.god_mode_found) {
+				k.data.god_mode_found = true;
+				Message({
+					k,
+					c,
+					text: "Thanks for reading the entire README.md. Here is a treat for you, you are invincible, any ghost touch in this mode will vanish.",
+					onKeyPress: () => k.go(name, level),
+				});
+			} else {
+				k.go(name, level);
+			}
+		});
 
 		k.onUpdate(() => {
 			// if game is completed

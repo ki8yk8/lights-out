@@ -21,6 +21,9 @@ const C = {
 k.data = {
 	paused: false, // pauses the player physics and player camera movement and player movement too
 	life: 3,
+	god_mode: false,
+	god_mode_found: false,
+	game_played: false,
 };
 
 registerGamePlayScene({ k, c: C, name: "startgame" });
@@ -54,4 +57,4 @@ k.setLayers(
 	"game"
 );
 
-k.go("startgame", 0);
+k.go("startgame", 1);
