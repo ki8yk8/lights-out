@@ -40,7 +40,15 @@ k.loadSprite("pumpkin", "sprites/pumpka.png");
 k.loadSprite("fuse", "sprites/sparkles.png");
 k.loadSprite("player", "sprites/dracula.png");
 k.loadSprite("sword", "sprites/sword.png");
-k.loadSprite("steel", "/sprites/steel.png");
+k.loadSprite("steel", "sprites/steel.png");
+
+k.loadSound("attack", "sounds/attack.mp3");
+k.loadSound("background", "sounds/background.mp3");
+k.loadSound("eat", "sounds/eat.mp3");
+k.loadSound("footstep", "sounds/footstep.mp3");
+k.loadSound("ghost-appear", "sounds/ghost-appear.mp3");
+k.loadSound("ghost", "sounds/ghost.mp3");
+k.loadSound("repair", "sounds/repair.mp3");
 
 k.setLayers(
 	[

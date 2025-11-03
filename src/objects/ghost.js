@@ -25,6 +25,8 @@ export function Ghost({ k, c, pos }) {
 		"ghost",
 	]);
 
+	k.play("ghost-appear");
+
 	// move the ghost
 	ghost.vel.x = rem(1) * c.GHOST_SPEED * 0.5 * ghost.dir.x;
 	ghost.vel.y = rem(1) * c.GHOST_SPEED * 0.5 * ghost.dir.y;

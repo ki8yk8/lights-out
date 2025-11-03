@@ -8,6 +8,8 @@ export function registerGamePlayScene({ k, name, c }) {
 	k.setGravity(0);
 
 	k.scene(name, (level) => {
+		const background_sound = k.play("background");
+
 		// creating the map
 		Map({ k, c, level });
 
@@ -45,6 +47,7 @@ export function registerGamePlayScene({ k, name, c }) {
 					fuse_needed: 3,
 					fuse_dropped: 0,
 				};
+				background_sound.stop();
 
 				k.go("gameover", level);
 			}
