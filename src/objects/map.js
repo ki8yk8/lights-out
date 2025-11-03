@@ -4,6 +4,7 @@ import { ElectricalBox } from "./electrical-box";
 import { Fuse } from "./fuse";
 import { Ghost } from "./ghost";
 import { Hints } from "./hints";
+import { Portal } from "./portal";
 
 export function Map({ k, c, level }) {
 	const [tile_w, tile_ht] = [rem(1), rem(1)];
@@ -34,15 +35,7 @@ export function Map({ k, c, level }) {
 				k.layer("bg"),
 				"wall",
 			],
-			"@": () => [
-				k.sprite("player"),
-				k.scale(1),
-				k.area(),
-				k.body(),
-				k.z(1),
-				k.layer("game"),
-				"player",
-			],
+			"@": Portal.bind(null, { k, c }),
 			"&": Ghost.bind(null, { k, c, horizontal: true }),
 			"%": Ghost.bind(null, { k, c, horizontal: false }),
 			$: Fuse.bind(null, { k, c }),
