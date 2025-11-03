@@ -24,6 +24,7 @@ export function ElectricalBox({ k, c }) {
 					} else {
 						k.data.fuse_dropped += k.data.fuse_held;
 						k.data.fuse_held = 0;
+						k.play("repair");
 
 						this.get(
 							"message"

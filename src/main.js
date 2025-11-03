@@ -25,21 +25,22 @@ registerGamePlayScene({ k, c: C, name: "startgame" });
 registerOverScene({ k, c: C, name: "gameover" });
 registerPromotionScene({ k, c: C, name: "promotion" });
 
-k.loadSprite("flashlight", "sprites/flashlight.png");
-k.loadSprite("help", "sprites/api_book.png");
-k.loadSprite("pumpkin", "sprites/pumpka.png");
-k.loadSprite("fuse", "sprites/sparkles.png");
-k.loadSprite("player", "sprites/dracula.png");
-k.loadSprite("sword", "sprites/sword.png");
-k.loadSprite("steel", "sprites/steel.png");
+await k.loadSprite("flashlight", "sprites/flashlight.png");
+await k.loadSprite("help", "sprites/api_book.png");
+await k.loadSprite("pumpkin", "sprites/pumpka.png");
+await k.loadSprite("fuse", "sprites/sparkles.png");
+await k.loadSprite("player", "sprites/dracula.png");
+await k.loadSprite("sword", "sprites/sword.png");
+await k.loadSprite("steel", "sprites/steel.png");
+await k.loadSprite("portal", "sprites/portal.png");
 
-k.loadSound("attack", "sounds/attack.mp3");
-k.loadSound("background", "sounds/background.mp3");
-k.loadSound("eat", "sounds/eat.mp3");
-k.loadSound("footstep", "sounds/footstep.mp3");
-k.loadSound("ghost-appear", "sounds/ghost-appear.mp3");
-k.loadSound("ghost", "sounds/ghost.mp3");
-k.loadSound("repair", "sounds/repair.mp3");
+await k.loadSound("attack", "sounds/attack.mp3");
+await k.loadSound("background", "sounds/background.mp3");
+await k.loadSound("eat", "sounds/eat.mp3");
+await k.loadSound("footstep", "sounds/footstep.mp3");
+await k.loadSound("ghost-appear", "sounds/ghost-appear.mp3");
+await k.loadSound("ghost", "sounds/ghost.mp3");
+await k.loadSound("repair", "sounds/repair.mp3");
 
 k.setLayers(
 	[

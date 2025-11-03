@@ -14,6 +14,7 @@ export function Fuse({ k, c }) {
 				this.onCollide("player", (player) => {
 					if (k.data.fuse_held >= c.BAG_CAPACITY) return;
 					k.data.fuse_held += 1;
+					k.play("eat");
 
 					// destroy the fuse
 					k.destroy(this);
