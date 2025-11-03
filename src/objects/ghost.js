@@ -12,8 +12,23 @@ export function Ghost({ k, c, horizontal = true }) {
 		k.scale(0.8),
 		"ghost",
 		{
+			dir: {
+				x: horizontal ? -1 : 0,
+				y: horizontal ? 0 : -1,
+			},
 			add() {
-				// add logic to move horizontally up and down
+				this.onUpdate(() => {
+					this.vel.x = this.dir.x * rem(1) * c.GHOST_SPEED;
+					this.vel.y = this.dir.y * rem(1) * c.GHOST_SPEED;
+				});
+
+				this.onCollide("wall", () => {
+					if (horizontal) {
+						this.dir.x *= -1;
+					} else {
+						this.dir.y *= -1;
+					}
+				});
 				// add sound effects
 				// add hit
 				// add hit sound
