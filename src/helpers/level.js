@@ -36,11 +36,19 @@ const level_data = {
 		fuse_needed: 3,
 		ghost_interval: 5,
 		ghost_lasts: 2,
+		time: {
+			m: 0,
+			s: 20,
+		},
 	},
 	2: {
 		fuse_needed: 4,
 		ghost_interval: 5,
 		ghost_lasts: 3,
+		time: {
+			m: 0,
+			s: 20,
+		},
 	},
 };
 

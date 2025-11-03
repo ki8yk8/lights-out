@@ -14,10 +14,6 @@ const C = {
 	PLAYER_SPEED: 10,
 	GHOST_SPEED: 8,
 	BAG_CAPACITY: 2,
-	LEVEL_TIME: {
-		minutes: 10,
-		seconds: 0,
-	},
 };
 
 k.data = {

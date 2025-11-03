@@ -2,6 +2,13 @@ export function rem(n, base = 32) {
 	return n * base;
 }
 
+export function doubleDigit(digit) {
+	let string = `${digit}`;
+	if (string.length >= 2) return string;
+
+	return `0${string}`;
+}
+
 export function getScreenPosForObjAt(k, obj, sx, sy) {
 	const desired_screen_pos = k.vec2(sx, sy);
 	let target_world_pos = obj.pos;

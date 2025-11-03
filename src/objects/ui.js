@@ -1,4 +1,6 @@
-export function UI({ k, c }) {
+import { doubleDigit } from "../helpers/utils";
+
+export function UI({ k, c, level }) {
 	// this is fixed and not affected by the camera movement
 	const ui = k.add([k.fixed(), k.layer("ui"), "ui"]);
 	let prev_data = { ...k.data };
@@ -13,12 +15,27 @@ export function UI({ k, c }) {
 		k.timer(),
 		"timer",
 		{
-			remaining_time: c.LEVEL_TIME,
+			t: k.data.time,
 		},
 	]);
 
 	// will implement this later because this may not be necessary at all.
-	// timer.loop(1, () => {});
+	let timer_loop = timer.loop(1, () => {
+		timer.t.s--;
+		if (timer.t.s < 0 && timer.t.m === 0) {
+			k.go("gameover", level);
+			timer_loop.cancel();
+		}
+
+		if (timer.t.s < 0 && timer.t.m > 0) {
+			timer.t.s = 59;
+			timer.t.m--;
+		}
+
+		timer.text = `Time Left: ${doubleDigit(timer.t.m)}:${doubleDigit(
+			timer.t.s
+		)}`;
+	});
 
 	// life
 	const life = ui.add([

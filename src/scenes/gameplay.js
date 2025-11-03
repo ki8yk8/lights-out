@@ -29,7 +29,7 @@ export function registerGamePlayScene({ k, name, c }) {
 
 		const player = Player({ k, c });
 
-		const ui = UI({ k, c });
+		const ui = UI({ k, c, level });
 
 		k.onUpdate(() => {
 			// if game is completed
