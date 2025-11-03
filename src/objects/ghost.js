@@ -5,11 +5,13 @@ import { rem } from "../helpers/utils";
 
 export function Ghost({ k, c, horizontal = true }) {
 	return [
-		k.sprite("pumpkin"),
+		k.sprite("pumpkin", {
+			width: rem(1.2),
+			height: rem(1.2),
+		}),
 		k.area(),
 		k.body(),
 		k.layer("game"),
-		k.scale(0.8),
 		"ghost",
 		{
 			dir: {
