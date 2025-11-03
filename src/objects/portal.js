@@ -14,6 +14,7 @@ export function Portal({ k, c }) {
 					k.area(),
 					k.body(),
 					k.z(1),
+					k.anchor("center"),
 					k.layer("game"),
 					"player",
 				]);

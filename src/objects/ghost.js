@@ -47,9 +47,22 @@ export function Ghost({ k, c, horizontal = true }) {
 						k.data.paused = true; // pause the game
 						// k.play("hurt");
 
-						await k.tween(player.worldPos(), protal.worldPos(), 1, (p) => {
-							player.pos = p;
+						// disappear the player
+						await k.tween(1, 0, 1, (s) => {
+							player.scaleTo(s);
 						});
+
+						// move the camera to focus the portal
+						await k.tween(k.getCamPos(), protal.worldPos(), 1, (p) => {
+							k.setCamPos(p);
+						});
+
+						// move the nonvisible player on top of the portal
+						(player.pos = protal.worldPos()),
+							// rescale the player
+							await k.tween(0, 1, 1, (s) => {
+								player.scaleTo(s);
+							});
 
 						k.data.paused = false;
 					}
