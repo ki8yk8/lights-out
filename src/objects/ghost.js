@@ -37,14 +37,21 @@ export function Ghost({ k, c, horizontal = true }) {
 				});
 
 				// add hit
-				this.onCollide("player", (player) => {
+				this.onCollide("player", async (player) => {
 					k.data.life--;
 					k.play("ghost");
 
 					// player should be moved back to the portal
 					const protal = k.get("portal", { recursive: true })[0];
 					if (protal) {
-						player.pos = protal.worldPos();
+						k.data.paused = true; // pause the game
+						// k.play("hurt");
+
+						await k.tween(player.worldPos(), protal.worldPos(), 1, (p) => {
+							player.pos = p;
+						});
+
+						k.data.paused = false;
 					}
 				});
 			},
