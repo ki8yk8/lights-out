@@ -37,9 +37,15 @@ export function Ghost({ k, c, horizontal = true }) {
 				});
 
 				// add hit
-				this.onCollide("player", () => {
+				this.onCollide("player", (player) => {
 					k.data.life--;
 					k.play("ghost");
+
+					// player should be moved back to the portal
+					const protal = k.get("portal", { recursive: true })[0];
+					if (protal) {
+						player.pos = protal.worldPos();
+					}
 				});
 			},
 		},
