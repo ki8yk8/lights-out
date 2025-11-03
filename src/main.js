@@ -22,12 +22,7 @@ const C = {
 
 k.data = {
 	paused: false, // pauses the player physics and player camera movement and player movement too
-	fuse_held: 0,
 	life: 3,
-	fuse_needed: 3,
-	fuse_dropped: 0,
-	ghost_interval: 5,
-	ghost_lasts: 2,
 };
 
 registerGamePlayScene({ k, c: C, name: "startgame" });
@@ -59,4 +54,4 @@ k.setLayers(
 	"game"
 );
 
-k.go("startgame", 2);
+k.go("startgame", 1);
