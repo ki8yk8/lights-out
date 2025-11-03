@@ -50,4 +50,4 @@ k.setLayers(
 	"game"
 );
 
-k.go("startgame", 2);
+k.go("startgame", 3);

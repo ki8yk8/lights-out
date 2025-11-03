@@ -23,6 +23,24 @@ export const MAP_LAYOUTS = {
 		"=               $                ====",
 		"==================================   ",
 	],
+	3: [
+		"=======================================",
+		"=                     #               =",
+		"=@     $                            $ =",
+		"========                             ==",
+		"       =            %             ====",
+		"       =         &                =   ",
+		"       =                          =   ",
+		"       = $                        =   ",
+		"       ===================        ====",
+		"                         =  $        =",
+		"                         =     &     =",
+		"                         =  $        =",
+		"                         ==========  =",
+		"                                =    =",
+		"                                = $  =",
+		"                                ======",
+	],
 };
 
 const reset_data = {
@@ -34,7 +52,6 @@ const reset_data = {
 const level_data = {
 	1: {
 		fuse_needed: 3,
-		ghost_interval: 5,
 		ghost_lasts: 2,
 		time: {
 			m: 0,
@@ -43,11 +60,16 @@ const level_data = {
 	},
 	2: {
 		fuse_needed: 4,
-		ghost_interval: 5,
-		ghost_lasts: 3,
 		time: {
 			m: 0,
 			s: 20,
+		},
+	},
+	3: {
+		fuse_needed: 6,
+		time: {
+			m: 0,
+			s: 30,
 		},
 	},
 };
