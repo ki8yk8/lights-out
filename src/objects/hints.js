@@ -15,7 +15,7 @@ export function Hints({ k, c }) {
 					let message = Message({
 						k,
 						c,
-						text: "There are fuse spread across the screen.",
+						text: "There are fuse spread across the screen. Your goal is to grab them, but be aware of the horror pumpkins, if they touch you your life is gone.",
 						keypress: false,
 					});
 
