@@ -35,7 +35,7 @@ export function registerGameCompleteScene({ k, c, name }) {
 		]);
 
 		k.onKeyPress("space", () => {
-			k.go("startgame", 1);
+			k.go("startgame", 1);	
 		})
 	});
 }

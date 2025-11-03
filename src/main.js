@@ -15,7 +15,7 @@ const C = {
 	PLAYER_SPEED: 10,
 	GHOST_SPEED: 8,
 	BAG_CAPACITY: 2,
-	MAX_LEVEL: 5,
+	MAX_LEVEL: 6,
 };
 
 k.data = {
@@ -54,4 +54,4 @@ k.setLayers(
 	"game"
 );
 
-k.go("startgame", 1);
+k.go("startgame", 6);
