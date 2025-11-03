@@ -37,13 +37,11 @@ export function UI({ k, c, level }) {
 		"timer",
 	]);
 
-	console.log(k.data.time)
-	// will implement this later because this may not be necessary at all.
 	let timer_loop = timer.loop(1, () => {
 		k.data.time.s--;
 		if (k.data.time.s < 0 && k.data.time.m === 0) {
-			k.go("gameover", level);
 			timer_loop.cancel();
+			k.go("gameover", level);
 		}
 
 		if (k.data.time.s < 0 && k.data.time.m > 0) {

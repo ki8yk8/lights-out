@@ -10,10 +10,10 @@ export function registerGamePlayScene({ k, name, c }) {
 
 	k.scene(name, (level) => {
 		// loading the level data to adjust the difficulty based on the level
-		k.data = {
+		k.data = structuredClone({
 			...k.data,
 			...getLevelData(level),
-		};
+		});
 
 		const background_sound = k.play("background");
 
