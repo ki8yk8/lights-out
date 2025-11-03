@@ -41,7 +41,7 @@ export function registerOverScene({ k, c, name = "gameover" }) {
 		});
 		hint.animate("angle", [2, 0, -2, 0, 2], {
 			duration: 2,
-		})
+		});
 
 		k.onKeyPress("space", () => {
 			k.go("startgame", level);

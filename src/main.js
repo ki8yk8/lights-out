@@ -2,6 +2,7 @@ import kaplay from "kaplay";
 import { registerGamePlayScene } from "./scenes/gameplay";
 import { registerOverScene } from "./scenes/over";
 import { registerPromotionScene } from "./scenes/promotion";
+import { registerGameCompleteScene } from "./scenes/complete";
 
 const k = kaplay({ global: false });
 
@@ -14,6 +15,7 @@ const C = {
 	PLAYER_SPEED: 10,
 	GHOST_SPEED: 8,
 	BAG_CAPACITY: 2,
+	MAX_LEVEL: 5,
 };
 
 k.data = {
@@ -24,6 +26,7 @@ k.data = {
 registerGamePlayScene({ k, c: C, name: "startgame" });
 registerOverScene({ k, c: C, name: "gameover" });
 registerPromotionScene({ k, c: C, name: "promotion" });
+registerGameCompleteScene({ k, c: C, name: "gamecomplete" });
 
 await k.loadSprite("flashlight", "sprites/flashlight.png");
 await k.loadSprite("help", "sprites/api_book.png");
@@ -51,4 +54,4 @@ k.setLayers(
 	"game"
 );
 
-k.go("startgame", 5);
+k.go("startgame", 1);

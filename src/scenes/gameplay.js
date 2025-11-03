@@ -43,7 +43,11 @@ export function registerGamePlayScene({ k, name, c }) {
 					fuse_dropped: 0,
 				};
 
-				k.go("promotion", level);
+				if (level < c.MAX_LEVEL) {
+					k.go("promotion", level);
+				} else {
+					k.go("gamecomplete");
+				}
 			}
 
 			if (k.data.life <= 0) {
