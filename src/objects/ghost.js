@@ -40,6 +40,12 @@ export function Ghost({ k, c, horizontal = true }) {
 
 				// add hit
 				this.onCollide("player", async (player) => {
+					if (k.data.god_mode) {
+						k.data.life++;
+						k.destroy(this);
+						return;
+					}
+
 					k.data.life--;
 					k.play("ghost");
 

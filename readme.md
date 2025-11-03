@@ -15,3 +15,7 @@ My original plan with the idea was to create the game in night mode and the conc
 
 1. I completed the ghost logic, ghost follows men and flashlight logic too.
 2. But, I couldn't create a light that subtracts the background darkness. I tried using blendmodes but it didn't work. So, I improvised.
+
+```
+If you have read this far, here is your gift, press 'g' while playing.
+```
