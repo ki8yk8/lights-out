@@ -1,53 +1,9 @@
+import { MAP_LAYOUTS } from "../helpers/level";
 import { rem } from "../helpers/utils";
 import { ElectricalBox } from "./electrical-box";
 import { Fuse } from "./fuse";
 import { Ghost } from "./ghost";
 import { Hints } from "./hints";
-
-const MAP_LAYOUTS = {
-	1: [
-		"=================================",
-		"=@  ?                          #=",
-		"=                               =",
-		"=                               =",
-		"=                               =",
-		"=                               =",
-		"=                               =",
-		"=                               =",
-		"=               $               =",
-		"=================               =",
-		"                =               =",
-		"                =               =",
-		"                =               =",
-		"                =               =",
-		"                =               =",
-		"                =               =",
-		"                =               =",
-		"                =$             $=",
-		"                =================",
-	],
-	2: [
-		"=================================",
-		"=@  ?                          #=",
-		"=                               =",
-		"=                               =",
-		"=                               =",
-		"=                               =",
-		"=                               =",
-		"=                               =",
-		"=               $               =",
-		"=================               =",
-		"                =               =",
-		"                =               =",
-		"                =               =",
-		"                =               =",
-		"                =               =",
-		"                =               =",
-		"                =               =",
-		"                =$             $=",
-		"                =================",
-	],
-};
 
 function transposeMatrix(mat) {
 	return mat[0].map((_, colIndex) => mat.map((row) => row[colIndex]));

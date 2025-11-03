@@ -1,3 +1,4 @@
+import { getLevelData } from "../helpers/level";
 import { Map } from "../objects/map";
 import { Message } from "../objects/message";
 import { Player } from "../objects/player";
@@ -8,16 +9,22 @@ export function registerGamePlayScene({ k, name, c }) {
 	k.setGravity(0);
 
 	k.scene(name, (level) => {
+		// loading the level data to adjust the difficulty based on the level
+		k.data = {
+			...getLevelData(level),
+		};
+
 		const background_sound = k.play("background");
 
 		// creating the map
 		Map({ k, c, level });
 
 		// creating the first message
-		Message({
-			k,
-			text: 'Welcome to the game! Let me tell you a secret, "If you are stuck, watchout for the hints"',
-		});
+		level === 1 &&
+			Message({
+				k,
+				text: 'Welcome to the game! Let me tell you a secret, "If you are stuck, watchout for the hints"',
+			});
 
 		const player = Player({ k, c });
 
@@ -39,16 +46,7 @@ export function registerGamePlayScene({ k, name, c }) {
 			}
 
 			if (k.data.life <= 0) {
-				// clear the data for new level; LATER move this to first
-				k.data = {
-					...k.data,
-					fuse_held: 0,
-					life: 3,
-					fuse_needed: 3,
-					fuse_dropped: 0,
-				};
 				background_sound.stop();
-
 				k.go("gameover", level);
 			}
 		});

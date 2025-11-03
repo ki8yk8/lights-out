@@ -26,8 +26,8 @@ k.data = {
 	life: 3,
 	fuse_needed: 3,
 	fuse_dropped: 0,
-	ghost_interval: 3,
-	ghost_lasts: 5,
+	ghost_interval: 5,
+	ghost_lasts: 2,
 };
 
 registerGamePlayScene({ k, c: C, name: "startgame" });
@@ -59,4 +59,4 @@ k.setLayers(
 	"game"
 );
 
-k.go("startgame", 1);
+k.go("startgame", 2);
