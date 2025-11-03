@@ -43,7 +43,9 @@ export function registerGamePlayScene({ k, name, c }) {
 					k,
 					c,
 					text: "Thanks for reading the entire README.md. Here is a treat for you, you are invincible, any ghost touch in this mode will vanish.",
-					onKeyPress: () => k.go(name, level),
+					onKeyPress: () => {
+						k.go(name, level);
+					},
 				});
 			} else {
 				k.go(name, level);
@@ -53,15 +55,6 @@ export function registerGamePlayScene({ k, name, c }) {
 		k.onUpdate(() => {
 			// if game is completed
 			if (k.data.fuse_dropped >= k.data.fuse_needed) {
-				// clear the data for new level; LATER move this to first
-				k.data = {
-					...k.data,
-					fuse_held: 0,
-					life: 3,
-					fuse_needed: 3,
-					fuse_dropped: 0,
-				};
-
 				if (level < c.MAX_LEVEL) {
 					k.go("promotion", level);
 				} else {

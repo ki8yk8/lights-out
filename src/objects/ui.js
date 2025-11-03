@@ -35,26 +35,24 @@ export function UI({ k, c, level }) {
 		k.color("#000000"),
 		k.timer(),
 		"timer",
-		{
-			t: k.data.time,
-		},
 	]);
 
+	console.log(k.data.time)
 	// will implement this later because this may not be necessary at all.
 	let timer_loop = timer.loop(1, () => {
-		timer.t.s--;
-		if (timer.t.s < 0 && timer.t.m === 0) {
+		k.data.time.s--;
+		if (k.data.time.s < 0 && k.data.time.m === 0) {
 			k.go("gameover", level);
 			timer_loop.cancel();
 		}
 
-		if (timer.t.s < 0 && timer.t.m > 0) {
-			timer.t.s = 59;
-			timer.t.m--;
+		if (k.data.time.s < 0 && k.data.time.m > 0) {
+			k.data.time.s = 59;
+			k.data.time.m--;
 		}
 
-		timer.text = `Time Left: ${doubleDigit(timer.t.m)}:${doubleDigit(
-			timer.t.s
+		timer.text = `Time Left: ${doubleDigit(k.data.time.m)}:${doubleDigit(
+			k.data.time.s
 		)}`;
 	});
 
